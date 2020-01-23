@@ -7,8 +7,6 @@ require 'open-uri'
 def annuaire_mairie
     mail = []
     page = Nokogiri::HTML(open("http://annuaire-des-mairies.com/")
-    adress = page.xpath('//*[@id="voyance-par-telephone"]/table/tbody/tr[2]/td/table/tbody/tr').each do |a|
-        mail << a.text
-    end
-  puts mail
+    adress = page.xpath('//tr[4]/td[2]')[0].text
+    puts adress
 end
