@@ -4,6 +4,7 @@ require 'open-uri'
 
 page = Nokogiri::HTML(open("https://coinmarketcap.com/all/views/all/"))
 
+# méthode qui retourne un tableau la valeur de chaque cryptomonnaies
 def crypto_value(page)
   price = []
   value  = page.xpath('//tr/td[5]/a').each do |v|
@@ -12,6 +13,7 @@ def crypto_value(page)
   return price
 end
 
+# méthode qui retourne un tableau le symbole de chaque cryptomonnaies
 def crypto_name(page)
   name = []
   coin = page.xpath('//tr/td[3]/div').each do |c|
@@ -20,6 +22,7 @@ def crypto_name(page)
   return name
 end
 
+# méthode qui retourne un hash contenant le symbole et le prix de chaque cryptomonnaies
 def my_hash(name, price)
   hash = Hash.new
   array = []
@@ -30,7 +33,7 @@ def my_hash(name, price)
   puts array
 end
 
-
+# méthode qui appelle mes méthodes
 def perform(page)
   price = crypto_value(page)
   name = crypto_name(page)
